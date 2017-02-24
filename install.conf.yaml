@@ -10,13 +10,12 @@
     ~/.bashrc:
     ~/.dotfiles: ''
     ~/.gitconfig: 
+    ~/.oh-my-zsh:
     ~/.screenrc:
     ~/.shell:
     ~/.tmux.conf: 
-    ~/.vim:
     ~/.vimrc:
     ~/.zshrc:
-    ~/.zsh:
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
