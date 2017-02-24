@@ -6,13 +6,9 @@
 - clean: ['~']
 
 - link:
-    ~/.bash:
-    ~/.bashrc:
     ~/.dotfiles: ''
     ~/.gitconfig: 
     ~/.oh-my-zsh:
-    ~/.screenrc:
-    ~/.shell:
     ~/.tmux.conf: 
     ~/.vimrc:
     ~/.zshrc:
