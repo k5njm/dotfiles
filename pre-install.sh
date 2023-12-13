@@ -8,11 +8,12 @@
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # Check if Homebrew is installed
     if [ ! -f "`which brew`" ]; then
-    echo 'Installing homebrew'
-    /bin/bash -c "NONINTERACTIVE=1 $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        echo 'Installing homebrew'
+        /bin/bash -c "NONINTERACTIVE=1 $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        export PATH=/opt/homebrew/bin:$PATH && brew bundle
     else
-    echo 'Updating homebrew'
-    brew update
+        echo 'Updating homebrew'
+        brew update
     fi
 elif command -v dnf >/dev/null 2>&1; then
     echo "dnf detected, proceeding with installations."
@@ -33,15 +34,24 @@ elif command -v dnf >/dev/null 2>&1; then
     tmux \
     toilet \
     tree \
-    vim
+    vim \
+    zsh
 else
     echo "dnf not found, aborting installations."
 fi
 
 
 echo 'Installing oh-my-zsh'
-/bin/sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k
+# Check if oh-my-zsh is installed
+OMZDIR="$HOME/.oh-my-zsh"
+if [ ! -d "$OMZDIR" ]; then
+  echo 'Installing oh-my-zsh'
+  /bin/sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k
+else
+  echo 'Updating oh-my-zsh'
+  upgrade_oh_my_zsh
+fi
 
 # Change default shell
 if [! $0 = "-zsh"]; then
