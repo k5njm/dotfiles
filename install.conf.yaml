@@ -34,9 +34,8 @@
 - shell:
   - - bash -c '[ -f ~/.ssh/id_ed25519 ] || ssh-keygen -t ed25519 -q -N "" -f ~/.ssh/id_ed25519'
     - Creating SSH keypair
-  - [bash -c "gh auth status || gh auth login", Logging into GitHub]
   - [sh -x add_github_keys.sh, Adding GitHub keys for SSH auth]
-  - [gh auth login -p https -w]
+  - [bash -c "gh auth status || gh auth login", Logging into GitHub]
   - [echo "Welcome to:" && toilet -f mono9 `hostname`, Show welcome]
   - [echo "Run 'exec zsh' to reload your shell", Show instructions]
 
