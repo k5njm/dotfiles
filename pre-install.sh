@@ -46,13 +46,12 @@ echo 'Installing oh-my-zsh'
 # Check if oh-my-zsh is installed
 OMZDIR="$HOME/.oh-my-zsh"
 if command -v omz > /dev/null; then
-    echo 'Upgrading oh-my-zsh`
+    echo 'Upgrading oh-my-zsh'
     omz update
 else
     echo 'Installing oh-my-zsh'
     /bin/sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k
-
 fi
 
 # Change default shell
