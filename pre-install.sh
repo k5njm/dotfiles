@@ -10,11 +10,12 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     if [ ! -f "`which brew`" ]; then
         echo 'Installing homebrew'
         /bin/bash -c "NONINTERACTIVE=1 $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        export PATH=/opt/homebrew/bin:$PATH && brew bundle
     else
         echo 'Updating homebrew'
         brew update
     fi
+    export PATH=/opt/homebrew/bin:$PATH && brew bundle
+
 elif command -v dnf >/dev/null 2>&1; then
     echo "dnf detected, proceeding with installations."
     sudo dnf -y install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
@@ -44,19 +45,20 @@ fi
 echo 'Installing oh-my-zsh'
 # Check if oh-my-zsh is installed
 OMZDIR="$HOME/.oh-my-zsh"
-if [ ! -d "$OMZDIR" ]; then
-  echo 'Installing oh-my-zsh'
-  /bin/sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k
+if command -v omz > /dev/null; then
+    echo 'Upgrading oh-my-zsh`
+    omz update
 else
-  echo 'Updating oh-my-zsh'
-  upgrade_oh_my_zsh
+    echo 'Installing oh-my-zsh'
+    /bin/sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k
+
 fi
 
 # Change default shell
-if [! $0 = "-zsh"]; then
-  echo 'Changing default shell to zsh'
-  chsh -s /bin/zsh
+if [ ! "$0" = "-zsh" ]; then
+    echo 'Changing default shell to zsh'
+    chsh -s /bin/zsh
 else
-  echo 'Already using zsh'
+    echo 'Already using zsh'
 fi
