@@ -2,13 +2,17 @@
     link:
       relink: true
       force: true
-
+    shell:
+        stderr: true
+        stdout: true
+        
 - clean: ['~']
 
 - shell:
-  - [sh pre-install.sh, Running pre-installation script]
+  - [sh -x pre-install.sh, Running pre-installation script]
   - [mkdir -p ~/.oh-my-zsh/custom/plugins, Creating oh-my-zsh custom plugins folder]
-  - [brew bundle, Installing Homebrew formulas from Brewfile]
+  - - export PATH=/opt/homebrew/bin:/home/linuxbrew/.linuxbrew/bin/:$PATH && brew bundle
+    - Installing Homebrew formulas from Brewfile]
 
 - link:
     ~/.dotfiles: ''
