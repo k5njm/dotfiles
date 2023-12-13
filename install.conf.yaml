@@ -7,15 +7,25 @@
 
 - shell:
   - [sh pre-install.sh, Running pre-installation script]
-
+  - [mkdir -p ~/.oh-my-zsh/custom/, Creating oh-my-zsh custom folder]
+  - [mkdir -p ~/.oh-my-zsh/custom/plugins, Creating oh-my-zsh custom plugins folder]
 
 - link:
     ~/.dotfiles: ''
-    ~/.gitconfig: 
+    ~/.gitconfig: gitconfig
+    ~/.gitconfig_local: gitconfig_local
     ~/.oh-my-zsh:
     ~/.tmux.conf: 
     ~/.vimrc:
     ~/.zshrc:
+      force: true
+      path: zshrc
+    ~/.oh-my-zsh/custom/my-aliases.zsh: oh-my-zsh/custom/my-aliases.zsh
+    ~/.oh-my-zsh/custom/plugins/brew: oh-my-zsh/custom/plugins/brew/
+    ~/.oh-my-zsh/custom/plugins/youtube-dl: oh-my-zsh/custom/plugins/youtube-dl/
+    ~/.oh-my-zsh/custom/plugins/zsh-completions: oh-my-zsh/custom/plugins/zsh-completions/
+    ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting: oh-my-zsh/custom/plugins/zsh-syntax-highlighting/
+    ~/.oh-my-zsh/custom/themes/bullet-train.zsh-theme: oh-my-zsh/custom/themes/bullet-train/bullet-train.zsh-theme
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
