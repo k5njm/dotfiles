@@ -12,6 +12,7 @@
   - [sh -x pre-install.sh, Running pre-installation script]
   - [git submodule update --init --recursive, Installing submodules]
   - [mkdir -p ~/.oh-my-zsh/custom/plugins, Adding oh-my-zsh plugins directory]
+  - [sh -x fonts/install.sh, Installing PowerLine fonts]
 
 - link:
     ~/.dotfiles: ''
