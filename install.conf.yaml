@@ -1,0 +1,22 @@
+- defaults:
+    link:
+      relink: true
+      force: true
+
+- clean: ['~']
+
+- shell:
+  - [sh pre-install.sh, Running pre-installation script]
+
+
+- link:
+    ~/.dotfiles: ''
+    ~/.gitconfig: 
+    ~/.oh-my-zsh:
+    ~/.tmux.conf: 
+    ~/.vimrc:
+    ~/.zshrc:
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
+
