@@ -15,4 +15,4 @@ curl -sL \
   jq -r '.[] | "# Title: \(.title), Created at: \(.created_at)\n\(.key)\n"' > "$authorized_keys_file"
 
 echo "Authorized Keys:"
-cat authorized_keys_file
+cat $authorized_keys_file
