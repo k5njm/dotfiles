@@ -1,18 +1,18 @@
 #!/bin/bash
 
-# URL of your GitHub public keys
-GITHUB_KEYS_URL="https://github.com/k5njm.keys"
+# Path to the authorized_keys file
+authorized_keys_file="$HOME/.ssh/authorized_keys"
 
-# File to store authorized keys
-AUTHORIZED_KEYS="$HOME/.ssh/authorized_keys"
+# Backup the current authorized_keys file
+cp "$authorized_keys_file" "${authorized_keys_file}.bak"
 
-# Create the file if it doesn't exist
-mkdir -p ~/.ssh/
-touch "$AUTHORIZED_KEYS"
+# Make the API call and overwrite the authorized_keys file
+curl -sL \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer $(gh auth token)" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  https://api.github.com/user/keys | \
+  jq -r '.[] | "# Title: \(.title), Created at: \(.created_at)\n\(.key)\n"' > "$authorized_keys_file"
 
-# Fetch and add keys if they don't already exist
-curl -s "$GITHUB_KEYS_URL" | while read -r key; do
-    if ! grep -qF -- "$key" "$AUTHORIZED_KEYS"; then
-        echo "$key" >> "$AUTHORIZED_KEYS"
-    fi
-done
+echo "Authorized Keys:"
+cat authorized_keys_file
