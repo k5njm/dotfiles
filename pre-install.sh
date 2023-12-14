@@ -36,6 +36,7 @@ elif command -v dnf >/dev/null 2>&1; then
     git \
     htop \
     jq \
+    libreoffice \
     ncdu \
     tmux \
     toilet \
