@@ -1,6 +1,6 @@
 #!/bin/bash
 
-script_dir=$(dirname "$0")
+SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 # Application installs.
 # For MacOS, use the provided `Brewfile`
@@ -17,7 +17,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     export PATH=/opt/homebrew/bin:$PATH && brew bundle
 
     # Specify the preferences directory
-    defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$script_dir/iterm2.plist"
+    defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$SCRIPTPATH/iterm2.plist"
     # Tell iTerm2 to use the custom preferences in the directory
     defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
